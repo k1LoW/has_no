@@ -24,7 +24,7 @@ class HasNoBehavior extends ModelBehavior {
         $this->hasAndBelongsToMany = (!empty($model->hasAndBelongsToMany)) ? $model->hasAndBelongsToMany : false;
 
         if (empty($config['init']) || $config['init'] === true) {
-            $this->hasNo($model);
+            $this->hasNo($model, false);
         }
     }
 
@@ -33,23 +33,25 @@ class HasNoBehavior extends ModelBehavior {
      * unbind all association
      *
      * @param &$model
+     * @param $reset
      * @return
      */
-    function hasNo(&$model){
+    function hasNo(&$model, $reset = false){
         $this->_makeAssociation();
-        return $model->unbindModel($this->association, false);
+        return $model->unbindModel($this->association, $reset);
     }
 
     /**
      * hasAll
      * reset all association
      *
-     * @param $arg
+     * @param &$model
+     * @param $reset
      * @return
      */
-    function hasAll(&$model){
+    function hasAll(&$model, $reset = false){
         $this->_makeAssociation();
-        return $model->bindModel($this->association, false);
+        return $model->bindModel($this->association, $reset);
     }
 
     /**
