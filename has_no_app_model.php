@@ -1,7 +1,7 @@
 <?php
 
   /**
-   * Simple bind model practice plugin for CakePHP.
+   * Simple binding model practice plugin for CakePHP.
    *
    */
   /**

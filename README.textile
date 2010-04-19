@@ -1,6 +1,6 @@
-h1. Simple bind model practice plugin for CakePHP.
+h1. Simple binding model practice plugin for CakePHP.
 
-This plugin support following bind model practice.
+This plugin support following binding model practice.
 
 # Bake and write bind property on model file.
 # unbindModel() all.
