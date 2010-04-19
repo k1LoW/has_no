@@ -1,17 +1,16 @@
 <?php
 
   /**
-   *  CakePHP HasNo Plugin
+   * CakePHP HasNo Plugin
    *
    *
-   * @params
    */
 class HasNoBehavior extends ModelBehavior {
 
-    var $belongsTo = array();
-    var $hasOne = array();
-    var $hasMany = array();
-    var $hasAndBelongsToMany = array();
+    var $belongsTo;
+    var $hasOne;
+    var $hasMany;
+    var $hasAndBelongsToMany;
     var $association = array();
 
     /**
@@ -30,6 +29,7 @@ class HasNoBehavior extends ModelBehavior {
         if (empty($config['init']) || $config['init'] === true) {
             $this->hasNo($model, false);
         }
+
     }
 
     /**
@@ -60,13 +60,15 @@ class HasNoBehavior extends ModelBehavior {
 
     /**
      * has
-     * bind model
+     * bind association
      *
      * @param &$model
+     * @param $conditions
+     * @param $reset
      * @return
      */
-    function has(&$model, $conditions, $reset = false){
-        $this->hasNo($model);
+    function has(&$model, $conditions = null, $reset = false){
+        // $this->hasNo($model);
         $this->_makeAssociation($conditions, true);
         return $model->bindModel($this->association, $reset);
     }
@@ -75,6 +77,7 @@ class HasNoBehavior extends ModelBehavior {
      * _makeAssociation
      *
      * @param $conditions
+     * @param $bind
      * @return
      */
     function _makeAssociation($conditions = null, $bind = true){
@@ -150,7 +153,6 @@ class HasNoBehavior extends ModelBehavior {
                     $this->association['hasAndBelongsToMany'] = array_intersect(array_keys($this->hasAndBelongsToMany), $conditions);
                 }
             }
-
             return;
         }
     }
