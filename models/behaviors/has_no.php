@@ -3,7 +3,6 @@
   /**
    * HasNo: hasNo() plugin for CakePHP.
    *
-   *
    */
   /**
    * HasNoBehavior code license:
@@ -12,7 +11,6 @@
    * @since       CakePHP(tm) v 1.3
    * @license     http://www.opensource.org/licenses/mit-license.php The MIT License
    */
-
 class HasNoBehavior extends ModelBehavior {
 
     var $belongsTo;
@@ -42,7 +40,7 @@ class HasNoBehavior extends ModelBehavior {
 
     /**
      * hasNo
-     * unbind all association
+     * unbind all association by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany
      *
      * @param &$model
      * @param $reset
@@ -55,7 +53,7 @@ class HasNoBehavior extends ModelBehavior {
 
     /**
      * hasAll
-     * reset all association
+     * bind all association by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany
      *
      * @param &$model
      * @param $reset
@@ -76,7 +74,6 @@ class HasNoBehavior extends ModelBehavior {
      * @return
      */
     function has(&$model, $conditions = null, $reset = false){
-        // $this->hasNo($model);
         $this->_makeAssociation($conditions, true);
         return $model->bindModel($this->association, $reset);
     }
