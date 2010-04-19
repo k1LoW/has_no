@@ -1,6 +1,10 @@
 h1. Simple bind model practice plugin for CakePHP.
 
-This plugin unbind model all, and bind simple.
+This plugin support following bind model practice.
+
+# Bake and write bind property on model file.
+# unbindModel() all.
+# bindModel() you want to.
 
 h2. Features
 
@@ -38,4 +42,4 @@ class Post extends Model {
 }
 </pre>
 
-If you want to use model's bind property, use method @$this->Post->has('AssociationModelName')@ , @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
+And if you want to use model's bind property, use method @$this->Post->has('AssociationModelName')@ , @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
