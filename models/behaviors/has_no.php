@@ -1,7 +1,7 @@
 <?php
 
   /**
-   * HasNo: hasNo() plugin for CakePHP.
+   * Simple bind model practice plugin for CakePHP.
    *
    */
   /**

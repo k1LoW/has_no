@@ -1,4 +1,4 @@
-h1. HasNo: hasNo() plugin for CakePHP.
+h1. Simple bind model practice plugin for CakePHP.
 
 This plugin unbind model all, and bind simple.
 
