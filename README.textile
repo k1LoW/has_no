@@ -15,8 +15,27 @@ Then, add the following code in whichever model you want to unbindModel() all (e
 <pre>
 <?php
 class Post extends Model {
-    var $actsAs = array('HasNo.HasNo')
+    var $actsAs = array('HasNo.HasNo');
+
+    var $hasMany = array(
+        'Comment' => array(
+            'className' => 'Comment',
+            'foreignKey' => 'post_id',
+            'dependent' => false,
+        )
+    );
+
+    var $hasAndBelongsToMany = array(
+        'Tag' => array(
+            'className' => 'Tag',
+            'joinTable' => 'posts_tags',
+            'foreignKey' => 'post_id',
+            'associationForeignKey' => 'tag_id',
+            'unique' => true,
+        )
+    );
+
 }
 </pre>
 
-If you want to use model's bind param, use method @$this->Post->has('AssociationModelName')@ @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
+If you want to use model's bind property, use method @$this->Post->has('AssociationModelName')@ , @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
