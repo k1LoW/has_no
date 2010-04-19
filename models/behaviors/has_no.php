@@ -64,19 +64,19 @@ class HasNoBehavior extends ModelBehavior {
         $this->association = array();
         if (empty($conditions)) {
             if (!empty($this->belongsTo)) {
-                $this->association['belongsTo'] = $this->belongsTo;
+                $this->association['belongsTo'] = array_keys($this->belongsTo);
             }
 
             if (!empty($this->hasOne)) {
-                $this->association['hasOne'] = $this->hasOne;
+                $this->association['hasOne'] = array_keys($this->hasOne);
             }
 
             if (!empty($this->hasMany)) {
-                $this->association['hasMany'] = $this->hasMany;
+                $this->association['hasMany'] = array_keys($this->hasMany);
             }
 
             if (!empty($this->hasAndBelongsToMany)) {
-                $this->association['hasAndBelongsToMany'] = $this->hasAndBelongsToMany;
+                $this->association['hasAndBelongsToMany'] = array_keys($this->hasAndBelongsToMany);
             }
         }
     }
