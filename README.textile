@@ -1,6 +1,6 @@
 h1. HasNo: hasNo() plugin for CakePHP.
 
-This plugin unbindModel() all. And 
+This plugin unbind model all, and bind simple.
 
 h2. Features
 
