@@ -1,6 +1,6 @@
 h1. HasNo: hasNo() plugin for CakePHP.
 
-This plugin unbindModel() all.
+This plugin unbindModel() all. And 
 
 h2. Features
 
@@ -10,17 +10,13 @@ h2. Features
 h2. Usage
 
 First, put `has_no' directory on app/plugins in your CakePHP application.
-Then, add the following code in whichever model you want to unbindModel() all.
+Then, add the following code in whichever model you want to unbindModel() all (ex. `Post' Model).
 
 <pre>
 <?php
-class Post extends Model
-{
+class Post extends Model {
     var $actsAs = array('HasNo.HasNo')
 }
 </pre>
 
-If you want to use model's bind param, use method @$this->Post->has('Comment')@ or @$this->Post->hasAll()@ .
-
-
-
+If you want to use model's bind param, use method @$this->Post->has('AssociationModelName')@ @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
