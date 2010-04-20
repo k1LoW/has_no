@@ -9,7 +9,7 @@ This plugin support following binding model practice.
 h2. Features
 
 * unbindModel() all by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
-* Provide simple bind model method has(), hasAll().
+* Provide simple bind model method has(), hasAll() by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
 
 h2. Usage
 
@@ -42,4 +42,4 @@ class Post extends Model {
 }
 </pre>
 
-And if you want to use model's bind property, use method @$this->Post->has('AssociationModelName')@ , @$this->Post->has(array('AssociationModelName1', 'AssociationModelName2'))@ or @$this->Post->hasAll()@ .
+And if you want to use model's bind property, use method @$this->Post->has('Comment')@ , @$this->Post->has(array('Comment', 'Tag'))@ or @$this->Post->hasAll()@ .
