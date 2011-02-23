@@ -140,7 +140,7 @@ class HasNoBehavior extends ModelBehavior {
                 }
             }
 
-            if (!empty($this->hasOne) && array_intersect(array_keys($this->hasOne[$this->modelName]), $conditions)) {
+            if (!empty($this->hasOne[$this->modelName]) && array_intersect(array_keys($this->hasOne[$this->modelName]), $conditions)) {
                 if ($bind) {
                     $this->association['hasOne'] = array_intersect_key($this->hasOne[$this->modelName], array_flip($conditions));
                 } else {
@@ -148,7 +148,7 @@ class HasNoBehavior extends ModelBehavior {
                 }
             }
 
-            if (!empty($this->hasMany) && array_intersect(array_keys($this->hasMany[$this->modelName]), $conditions)) {
+            if (!empty($this->hasMany[$this->modelName]) && array_intersect(array_keys($this->hasMany[$this->modelName]), $conditions)) {
                 if ($bind) {
                     $this->association['hasMany'] = array_intersect_key($this->hasMany[$this->modelName], array_flip($conditions));
                 } else {
@@ -156,7 +156,7 @@ class HasNoBehavior extends ModelBehavior {
                 }
             }
 
-            if (!empty($this->hasAndBelongsToMany) && array_intersect(array_keys($this->hasAndBelongsToMany[$this->modelName]), $conditions)) {
+            if (!empty($this->hasAndBelongsToMany[$this->modelName]) && array_intersect(array_keys($this->hasAndBelongsToMany[$this->modelName]), $conditions)) {
                 if ($bind) {
                     $this->association['hasAndBelongsToMany'] = array_intersect_key($this->hasAndBelongsToMany[$this->modelName], array_flip($conditions));
                 } else {
