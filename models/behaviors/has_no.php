@@ -17,7 +17,6 @@ class HasNoBehavior extends ModelBehavior {
     var $hasOne = array();
     var $hasMany = array();
     var $hasAndBelongsToMany = array();
-    var $association = array();
     var $modelName;
 
     /**
@@ -28,6 +27,7 @@ class HasNoBehavior extends ModelBehavior {
      */
     function setup(&$model, $config = array()){
 
+        $this->model = $model;
         $this->modelName = $model->alias;
 
         $this->belongsTo[$this->modelName] = (!empty($model->belongsTo)) ? $model->belongsTo : false;
@@ -51,7 +51,7 @@ class HasNoBehavior extends ModelBehavior {
     function hasNo(&$model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, false);
-        return $model->unbindModel($this->association, $reset);
+        return $model->unbindModel($this->model->hasNoAssociation, $reset);
     }
 
     /**
@@ -65,7 +65,7 @@ class HasNoBehavior extends ModelBehavior {
     function hasAll(&$model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, true);
-        return $model->bindModel($this->association, $reset);
+        return $model->bindModel($this->model->hasNoAssociation, $reset);
     }
 
     /**
@@ -80,7 +80,7 @@ class HasNoBehavior extends ModelBehavior {
     function has(&$model, $conditions = null, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation($conditions, true);
-        return $model->bindModel($this->association, $reset);
+        return $model->bindModel($this->model->hasNoAssociation, $reset);
     }
 
     /**
@@ -91,37 +91,37 @@ class HasNoBehavior extends ModelBehavior {
      * @return
      */
     function _makeAssociation($conditions = null, $bind = true){
-        $this->association = array();
+        $this->model->hasNoAssociation = array();
         if (empty($conditions)) {
             if (!empty($this->belongsTo[$this->modelName])) {
                 if ($bind) {
-                    $this->association['belongsTo'] = $this->belongsTo[$this->modelName];
+                    $this->model->hasNoAssociation['belongsTo'] = $this->belongsTo[$this->modelName];
                 } else {
-                    $this->association['belongsTo'] = array_keys($this->belongsTo[$this->modelName]);
+                    $this->model->hasNoAssociation['belongsTo'] = array_keys($this->belongsTo[$this->modelName]);
                 }
             }
 
             if (!empty($this->hasOne[$this->modelName])) {
                 if ($bind) {
-                    $this->association['hasOne'] = $this->hasOne[$this->modelName];
+                    $this->model->hasNoAssociation['hasOne'] = $this->hasOne[$this->modelName];
                 } else {
-                    $this->association['hasOne'] = array_keys($this->hasOne[$this->modelName]);
+                    $this->model->hasNoAssociation['hasOne'] = array_keys($this->hasOne[$this->modelName]);
                 }
             }
 
             if (!empty($this->hasMany[$this->modelName])) {
                 if ($bind) {
-                    $this->association['hasMany'] = $this->hasMany[$this->modelName];
+                    $this->model->hasNoAssociation['hasMany'] = $this->hasMany[$this->modelName];
                 } else {
-                    $this->association['hasMany'] = array_keys($this->hasMany[$this->modelName]);
+                    $this->model->hasNoAssociation['hasMany'] = array_keys($this->hasMany[$this->modelName]);
                 }
             }
 
             if (!empty($this->hasAndBelongsToMany[$this->modelName])) {
                 if ($bind) {
-                    $this->association['hasAndBelongsToMany'] = $this->hasAndBelongsToMany[$this->modelName];
+                    $this->model->hasNoAssociation['hasAndBelongsToMany'] = $this->hasAndBelongsToMany[$this->modelName];
                 } else {
-                    $this->association['hasAndBelongsToMany'] = array_keys($this->hasAndBelongsToMany[$this->modelName]);
+                    $this->model->hasNoAssociation['hasAndBelongsToMany'] = array_keys($this->hasAndBelongsToMany[$this->modelName]);
                 }
             }
             return;
@@ -134,33 +134,33 @@ class HasNoBehavior extends ModelBehavior {
         if (is_array($conditions)) {
             if (!empty($this->belongsTo[$this->modelName]) && array_intersect(array_keys($this->belongsTo[$this->modelName]), $conditions)) {
                 if ($bind) {
-                    $this->association['belongsTo'] = array_intersect_key($this->belongsTo[$this->modelName], array_flip($conditions));
+                    $this->model->hasNoAssociation['belongsTo'] = array_intersect_key($this->belongsTo[$this->modelName], array_flip($conditions));
                 } else {
-                    $this->association['belongsTo'] = array_intersect(array_keys($this->belongsTo[$this->modelName]), $conditions);
+                    $this->model->hasNoAssociation['belongsTo'] = array_intersect(array_keys($this->belongsTo[$this->modelName]), $conditions);
                 }
             }
 
             if (!empty($this->hasOne[$this->modelName]) && array_intersect(array_keys($this->hasOne[$this->modelName]), $conditions)) {
                 if ($bind) {
-                    $this->association['hasOne'] = array_intersect_key($this->hasOne[$this->modelName], array_flip($conditions));
+                    $this->model->hasNoAssociation['hasOne'] = array_intersect_key($this->hasOne[$this->modelName], array_flip($conditions));
                 } else {
-                    $this->association['hasOne'] = array_intersect(array_keys($this->hasOne[$this->modelName]), $conditions);
+                    $this->model->hasNoAssociation['hasOne'] = array_intersect(array_keys($this->hasOne[$this->modelName]), $conditions);
                 }
             }
 
             if (!empty($this->hasMany[$this->modelName]) && array_intersect(array_keys($this->hasMany[$this->modelName]), $conditions)) {
                 if ($bind) {
-                    $this->association['hasMany'] = array_intersect_key($this->hasMany[$this->modelName], array_flip($conditions));
+                    $this->model->hasNoAssociation['hasMany'] = array_intersect_key($this->hasMany[$this->modelName], array_flip($conditions));
                 } else {
-                    $this->association['hasMany'] = array_intersect(array_keys($this->hasMany[$this->modelName]), $conditions);
+                    $this->model->hasNoAssociation['hasMany'] = array_intersect(array_keys($this->hasMany[$this->modelName]), $conditions);
                 }
             }
 
             if (!empty($this->hasAndBelongsToMany[$this->modelName]) && array_intersect(array_keys($this->hasAndBelongsToMany[$this->modelName]), $conditions)) {
                 if ($bind) {
-                    $this->association['hasAndBelongsToMany'] = array_intersect_key($this->hasAndBelongsToMany[$this->modelName], array_flip($conditions));
+                    $this->model->hasNoAssociation['hasAndBelongsToMany'] = array_intersect_key($this->hasAndBelongsToMany[$this->modelName], array_flip($conditions));
                 } else {
-                    $this->association['hasAndBelongsToMany'] = array_intersect(array_keys($this->hasAndBelongsToMany[$this->modelName]), $conditions);
+                    $this->model->hasNoAssociation['hasAndBelongsToMany'] = array_intersect(array_keys($this->hasAndBelongsToMany[$this->modelName]), $conditions);
                 }
             }
             return;
