@@ -7,17 +7,18 @@
   /**
    * HasNoBehavior code license:
    *
-   * @copyright   Copyright (C) 2010 by 101000code/101000LAB
-   * @since       CakePHP(tm) v 1.3
+   * @copyright   Copyright (C) 2010-2012 by 101000code/101000LAB
+   * @since       CakePHP(tm) v 2.0
    * @license     http://www.opensource.org/licenses/mit-license.php The MIT License
    */
 class HasNoBehavior extends ModelBehavior {
 
-    var $belongsTo = array();
-    var $hasOne = array();
-    var $hasMany = array();
-    var $hasAndBelongsToMany = array();
-    var $modelName;
+    private $belongsTo = array();
+    private $hasOne = array();
+    private $hasMany = array();
+    private $hasAndBelongsToMany = array();
+    private $model;
+    private $modelName;
 
     /**
      * setup
@@ -25,7 +26,7 @@ class HasNoBehavior extends ModelBehavior {
      * @param &$model
      * @param $config
      */
-    function setup(&$model, $config = array()){
+    public function setUp(&$model, $config = array()){
 
         $this->model = $model;
         $this->modelName = $model->alias;
@@ -48,7 +49,7 @@ class HasNoBehavior extends ModelBehavior {
      * @param $reset
      * @return
      */
-    function hasNo(&$model, $reset = false){
+    public function hasNo(&$model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, false);
         return $model->unbindModel($this->model->hasNoAssociation, $reset);
@@ -62,7 +63,7 @@ class HasNoBehavior extends ModelBehavior {
      * @param $reset
      * @return
      */
-    function hasAll(&$model, $reset = false){
+    public function hasAll(&$model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, true);
         return $model->bindModel($this->model->hasNoAssociation, $reset);
@@ -77,7 +78,7 @@ class HasNoBehavior extends ModelBehavior {
      * @param $reset
      * @return
      */
-    function has(&$model, $conditions = null, $reset = false){
+    public function has(&$model, $conditions = null, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation($conditions, true);
         return $model->bindModel($this->model->hasNoAssociation, $reset);
@@ -90,7 +91,7 @@ class HasNoBehavior extends ModelBehavior {
      * @param $bind
      * @return
      */
-    function _makeAssociation($conditions = null, $bind = true){
+    private function _makeAssociation($conditions = null, $bind = true){
         $this->model->hasNoAssociation = array();
         if (empty($conditions)) {
             if (!empty($this->belongsTo[$this->modelName])) {
