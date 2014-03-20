@@ -13,6 +13,6 @@
             }
     ],
     "require": {
-        "composer/installers": "*",
+        "composer/installers": "*"
     }
 }
