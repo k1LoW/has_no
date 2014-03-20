@@ -23,10 +23,10 @@ class HasNoBehavior extends ModelBehavior {
     /**
      * setup
      *
-     * @param &$model
+     * @param $model
      * @param $config
      */
-    public function setUp(&$model, $config = array()){
+    public function setUp(Model $model, $config = array()){
 
         $this->model = $model;
         $this->modelName = $model->alias;
@@ -45,11 +45,11 @@ class HasNoBehavior extends ModelBehavior {
      * hasNo
      * unbind all association by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany
      *
-     * @param &$model
+     * @param Model $model
      * @param $reset
      * @return
      */
-    public function hasNo(&$model, $reset = false){
+    public function hasNo(Model $model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, false);
         return $model->unbindModel($this->model->hasNoAssociation, $reset);
@@ -59,11 +59,11 @@ class HasNoBehavior extends ModelBehavior {
      * hasAll
      * bind all association by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany
      *
-     * @param &$model
+     * @param Model $model
      * @param $reset
      * @return
      */
-    public function hasAll(&$model, $reset = false){
+    public function hasAll(Model $model, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation(null, true);
         return $model->bindModel($this->model->hasNoAssociation, $reset);
@@ -73,12 +73,12 @@ class HasNoBehavior extends ModelBehavior {
      * has
      * bind association
      *
-     * @param &$model
+     * @param Model $model
      * @param $conditions
      * @param $reset
      * @return
      */
-    public function has(&$model, $conditions = null, $reset = false){
+    public function has(Model $model, $conditions = null, $reset = false){
         $this->modelName = $model->alias;
         $this->_makeAssociation($conditions, true);
         return $model->bindModel($this->model->hasNoAssociation, $reset);
