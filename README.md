@@ -1,27 +1,27 @@
-h1. Simple binding model practice plugin for CakePHP.
+# Simple binding model practice plugin for CakePHP.
 
 This plugin support following binding model practice.
 
-# Bake and write bind property on model file.
-# unbindModel() all.
-# bindModel() you want to.
+> Bake and write bind property on model file.
+> unbindModel() all.
+> bindModel() you want to.
 
-h2. Features
+## Features
 
 * unbindModel() all by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
 * Provide simple bind model method has(), hasAll() by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
 
-h2. Usage
+## Usage
 
-First, put `has_no' directory on app/plugins in your CakePHP application.
-Then, add the following code in whichever model you want to unbindModel() all (ex. `Post' Model).
+First, put `has_no` directory on app/plugins in your CakePHP application.
+Then, add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
 
-<pre>
+```
 <?php
 class Post extends Model {
-    var $actsAs = array('HasNo.HasNo');
+    public $actsAs = array('HasNo.HasNo');
 
-    var $hasMany = array(
+    public $hasMany = array(
         'Comment' => array(
             'className' => 'Comment',
             'foreignKey' => 'post_id',
@@ -29,7 +29,7 @@ class Post extends Model {
         )
     );
 
-    var $hasAndBelongsToMany = array(
+    public $hasAndBelongsToMany = array(
         'Tag' => array(
             'className' => 'Tag',
             'joinTable' => 'posts_tags',
@@ -40,6 +40,10 @@ class Post extends Model {
     );
 
 }
-</pre>
+```
 
-And if you want to use model's bind property, use method @$this->Post->has('Comment')@ , @$this->Post->has(array('Comment', 'Tag'))@ or @$this->Post->hasAll()@ .
+And if you want to use model's bind property, use method `$this->Post->has('Comment')` , `$this->Post->has(array('Comment', 'Tag'))` or `$this->Post->hasAll()` .
+
+## License
+
+under MIT License
