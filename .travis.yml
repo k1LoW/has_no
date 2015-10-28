@@ -1,0 +1,36 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+
+env:
+  - DB=mysql CAKEPHP=2.5.9
+  - DB=pgsql CAKEPHP=2.5.9
+  - DB=mysql CAKEPHP=2.6.11
+  - DB=pgsql CAKEPHP=2.6.11
+  - DB=mysql CAKEPHP=2.7.4
+  - DB=pgsql CAKEPHP=2.7.4
+
+  
+before_script:
+  - composer install --dev
+  - sh -c "if [ '$DB' = 'mysql' ]; then mysql -e 'CREATE DATABASE cakephp_test;'; fi"
+  - sh -c "if [ '$DB' = 'pgsql' ]; then psql -c 'CREATE DATABASE cakephp_test;' -U postgres; fi"
+  - wget https://github.com/cakephp/cakephp/tarball/$CAKEPHP -O cake.tar.gz
+  - tar xf cake.tar.gz
+  - mv cakephp-cakephp-* ./cakephp
+  - chmod -R 777 ./cakephp/app/tmp
+  - echo "<?php
+    App::build(array(
+    'Plugin' => array('/home/travis/build/k1LoW/'),
+    ));
+    CakePlugin::loadAll();
+    ini_set('include_path',  '/home/travis/build/k1LoW/HasNo/vendor/phpunit/phpunit' . PATH_SEPARATOR . ini_get('include_path'));
+    " > cakephp/app/Config/bootstrap.php
+  - mv Test/database.php cakephp/app/Config/database.php
+  - cd ./cakephp
+
+script:
+  - ./lib/Cake/Console/cake test HasNo Model/Behavior/HasNo --stderr
