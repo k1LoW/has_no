@@ -13,8 +13,7 @@ This plugin support following binding model practice.
 
 ## Usage
 
-First, put `has_no` directory on app/plugins in your CakePHP application.
-Then, add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
+Add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
 
 ```
 <?php
