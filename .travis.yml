@@ -11,7 +11,8 @@ env:
     - PLUGIN_NAME=HasNo
     - REQUIRE=""
     - DB=mysql CAKE_VERSION=2.6
-
+    - secure: "TsoeAZwdK27t4D6dImCIqY7viI8hH2EInxHSUCnDt2arw+BFZxU/Cqoxrws6roEAMx67h8MKS6D/bak62TfKzNVYoP3jxU+nSA8sPEJaVZ+UY4iovWqYUK9rDwok84ePIRFiXDIYfa54dT6iwWFUJ3oMlzvGYBGIstse7grUNc4="
+    
   matrix:
     - DB=mysql CAKE_VERSION=2.4
     - DB=mysql CAKE_VERSION=2.5
