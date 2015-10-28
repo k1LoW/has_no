@@ -1,4 +1,4 @@
-# Simple binding model practice plugin for CakePHP.
+# Simple binding model practice plugin for CakePHP. [![Build Status](https://travis-ci.org/k1LoW/has_no.svg)](https://travis-ci.org/k1LoW/has_no)
 
 This plugin support following binding model practice.
 
