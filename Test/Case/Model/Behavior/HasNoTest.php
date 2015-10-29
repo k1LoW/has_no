@@ -128,6 +128,7 @@ class HasNoTestCase extends CakeTestCase{
                 'modified' => '2012-07-05 00:00:00',
             ),
         );
+        $result = $this->fitPostgresResult($result);
         $this->assertIdentical($result, $expect);
     }
 
@@ -170,6 +171,7 @@ class HasNoTestCase extends CakeTestCase{
                 ),
             ),
         );
+        $result = $this->fitPostgresResult($result);
         $this->assertIdentical($result, $expect);
     }
 
@@ -240,6 +242,23 @@ class HasNoTestCase extends CakeTestCase{
                 ),
             ),
         );
+        $result = $this->fitPostgresResult($result);
         $this->assertIdentical($result, $expect);
+    }
+
+    /**
+     * fitPostgresResult
+     * PostgreSQL return integer / MySQL return string
+     *
+     */
+    private function fitPostgresResult($result){
+        $func = function($value) {
+            if (is_int($value)) {
+                return (string)$value;
+            }
+            return $value;
+        };
+        array_walk_recursive($result, $func);
+        return $result;
     }
 }
