@@ -252,11 +252,10 @@ class HasNoTestCase extends CakeTestCase{
      *
      */
     private function fitPostgresResult($result){
-        $func = function($value) {
+        $func = function(&$value) {
             if (is_int($value)) {
-                return (string)$value;
+                $value = (string)$value;
             }
-            return $value;
         };
         array_walk_recursive($result, $func);
         return $result;
