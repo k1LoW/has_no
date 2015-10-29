@@ -1,4 +1,4 @@
-# Simple binding model practice plugin for CakePHP.
+# Simple binding model practice plugin for CakePHP. [![Build Status](https://travis-ci.org/k1LoW/has_no.svg)](https://travis-ci.org/k1LoW/has_no)
 
 This plugin support following binding model practice.
 
@@ -13,8 +13,7 @@ This plugin support following binding model practice.
 
 ## Usage
 
-First, put `has_no` directory on app/plugins in your CakePHP application.
-Then, add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
+Add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
 
 ```
 <?php
