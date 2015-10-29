@@ -102,6 +102,7 @@ class HasNoTestCase extends CakeTestCase{
                 'modified' => '2012-07-05 00:00:00',
             ),
         );
+        $result = $this->fitPostgresResult($result);
         $this->assertIdentical($result, $expect);
     }
 
