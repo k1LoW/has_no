@@ -15,7 +15,7 @@ class HasNoBehavior extends ModelBehavior {
 
     private $model;
     private $modelName;
-    private $contain;
+    private $contain = array();
 
     /**
      * setup
@@ -30,9 +30,10 @@ class HasNoBehavior extends ModelBehavior {
         $this->model->Behaviors->unload('Containable');
         $this->model->Behaviors->load('Containable');
         $this->model->Behaviors->enable('Containable');
+        $this->contain[$this->modelName] = false;
 
         if (empty($config['init']) || $config['init'] === true) {
-            $this->hasNo($model, false);
+            $this->hasNo($model);
         }
     }
 
@@ -44,9 +45,9 @@ class HasNoBehavior extends ModelBehavior {
      * @param $reset
      * @return
      */
-    public function hasNo(Model $model, $reset = false){
-        $this->contain = array();
-        return $this->contain;
+    public function hasNo(Model $model){
+        $this->contain[$this->modelName] = array();
+        return $this->contain[$this->modelName];
     }
 
     /**
@@ -64,10 +65,10 @@ class HasNoBehavior extends ModelBehavior {
                 continue;
             }
             foreach ($model->{$assoc} as $assocModel => $param) {
-                array_push($this->contain, $assocModel);
+                array_push($this->contain[$this->modelName], $assocModel);
             }
         }
-        return $this->contain;
+        return $this->contain[$this->modelName];
     }
 
     /**
@@ -83,7 +84,8 @@ class HasNoBehavior extends ModelBehavior {
         if (empty($conditions)) {
             return $this->hasAll($model);
         }
-        $this->contain = array_unique(array_merge($this->contain, (array)$conditions));
+        $this->contain[$this->modelName] = array_unique(array_merge($this->contain[$this->modelName], (array)$conditions));
+        return $this->contain[$this->modelName];
     }
 
     /**
@@ -91,8 +93,8 @@ class HasNoBehavior extends ModelBehavior {
      *
      */
     public function beforeFind(Model $model, $queryData){
-        if (!isset($queryData['contain'])) {
-            $queryData['contain'] = $this->contain;
+        if (!isset($queryData['contain']) && $this->contain[$this->modelName] !== false) {
+            $queryData['contain'] = $this->contain[$this->modelName];
         }
         return $queryData;
     }
