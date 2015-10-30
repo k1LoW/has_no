@@ -13,7 +13,7 @@ This plugin support following binding model practice.
 
 ## !!!!!NOTICE!!!!!
 
-### HasNo 3.x
+### HasNo >= 3.x
 
 Containable based
 
