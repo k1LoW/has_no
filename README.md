@@ -11,6 +11,16 @@ This plugin support following binding model practice.
 * unbindModel() all by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
 * Provide simple bind model method has(), hasAll() by Model::belongsTo, Model::hasOne, Model::hasMany, Model::hasAndBelongsToMany.
 
+## !!!!!NOTICE!!!!!
+
+### HasNo 3.x
+
+Containable based
+
+### HasNo 2.x
+
+Property modifiy based
+
 ## Usage
 
 Add the following code in whichever model you want to unbindModel() all (ex. `Post` Model).
